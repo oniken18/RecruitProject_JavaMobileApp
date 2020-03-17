@@ -1,0 +1,39 @@
+     // Read Clients from Biz.nf
+//        OkHttpClient OkClient = new OkHttpClient();
+//        String strURL = "http://oniken.c1.biz/server/actions/GetClients.php?";
+//        //String strURL = "http://reqres.in/api/users?page=2";
+//        Request request = new Request.Builder().url(strURL).build();
+//
+//        OkClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (response.isSuccessful()){
+//                    String strClientsList = "{'Client':" + response.body().string() + '}';
+//                    System.out.println(strClientsList);
+//                    try {
+//                        JSONObject JSONClients = new JSONObject(strClientsList);
+//                        JSONArray JC = JSONClients.getJSONArray("Client");
+//
+//                        for(int i=0; i < JC.length();++i){
+//                            JSONObject JClient = JC.getJSONObject(i);
+//                            Clients.add(new Client(JClient.getInt("ClientId") ,JClient.getString("FirstName"),JClient.getString("LastName"),JClient.getInt("IsFlag")==1));
+//                        }
+//
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                setListAdapter();
+//                            }
+//                        });
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });

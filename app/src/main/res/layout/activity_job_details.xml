@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".JobDetailsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/lblTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#770000"
+            android:text="New Job"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <TextView
+                android:id="@+id/lblDetails"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="7dp"
+                android:text="Job Details"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/isActive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Active"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtJob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:hint="Job Description"
+            android:inputType="text"
+            android:nextFocusForward="@id/JobNumber"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/JobNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:hint="Job Number"
+            android:inputType="number"
+            android:nextFocusForward="@id/Category"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Category"
+            android:completionThreshold="1"
+            android:hint="Category"
+            android:inputType="text"
+            android:nextFocusForward="@id/SubCategory"
+            android:textColor="#000000"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/SubCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Sub Category"
+            android:completionThreshold="1"
+            android:hint="Sub Category"
+            android:inputType="text"
+            android:nextFocusForward="@id/JobCapacityId"
+            android:textColor="#000000"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/JobCapacityId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Job Capacity(Full-Time)"
+            android:completionThreshold="1"
+            android:hint="Job Capacity(Full-Time)"
+            android:inputType="text"
+            android:nextFocusForward="@id/CityId"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/lblLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Job Location"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <AutoCompleteTextView
+            android:id="@+id/CityId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="City"
+            android:completionThreshold="1"
+            android:hint="City"
+            android:inputType="text"
+            android:nextFocusForward="@id/Address"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/AreaId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Category"
+            android:completionThreshold="1"
+            android:hint="Area"
+            android:background="@drawable/border_black_disable"
+            android:textSize="18sp"
+            android:textColor="#000000"/>
+
+        <Button
+            android:id="@+id/butSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+</ScrollView>

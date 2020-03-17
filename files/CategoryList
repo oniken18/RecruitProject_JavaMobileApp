@@ -1,0 +1,14 @@
+{"CategoryList":[
+  {
+    "CategoryId":"1",
+    "Category":"the Category1"
+  },
+  {
+    "CategoryId":"2",
+    "Category":"the Category2"
+  },
+  {
+    "CategoryId":"3",
+    "Category":"the Category3"
+  }
+]}

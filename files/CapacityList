@@ -1,0 +1,8 @@
+{"CapacityList":[
+  {"JobCapacityId":"1",
+    "JobCapacity":"Full-Time"},
+  {"JobCapacityId":"2",
+    "JobCapacity":"Half Job"},
+  {"JobCapacityId":"3",
+    "JobCapacity":"Internship"}
+]}

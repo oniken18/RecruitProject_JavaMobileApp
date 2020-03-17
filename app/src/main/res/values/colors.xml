@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAppMain">#770000</color>
+    <color name="colorAppBack">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSeparatorLine">#68d9d5</color>
+    <color name="colorWelcomePage">#a3c9f0</color>
+
+</resources>

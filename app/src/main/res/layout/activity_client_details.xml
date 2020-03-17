@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".ClientDetailsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/lblTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#770000"
+            android:text="New"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <TextView
+                android:id="@+id/lblDetails"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="7dp"
+                android:text="Client Details"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/isActive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Active"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/FirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:nextFocusForward="@id/LastName"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/LastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:nextFocusForward="@id/Email"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:nextFocusForward="@id/Phone"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/Phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:nextFocusForward="@id/CityId"
+            android:textColor="#000000"/>
+
+
+        <TextView
+            android:id="@+id/lblAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Address Details"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <AutoCompleteTextView
+            android:id="@+id/CityId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="City"
+            android:completionThreshold="1"
+            android:hint="City"
+            android:inputType="text"
+            android:nextFocusForward="@id/Address"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_black"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text"
+            android:nextFocusForward="@id/JobRequest"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/lblJobRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Job Request"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <AutoCompleteTextView
+                android:id="@+id/JobRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="3"
+                android:completionHint="Job request"
+                android:completionThreshold="1"
+                android:hint="Job request"
+                android:inputType="text"
+                android:nextFocusForward="@id/JobCapacityId"
+                android:textColor="#000000"/>
+
+            <EditText
+                android:id="@+id/JobRequestId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_black"
+                android:ems="10"
+                android:hint="Job num"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/JobFieldId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Category"
+            android:completionThreshold="1"
+            android:hint="Category"
+            android:background="@drawable/border_black_disable"
+            android:textSize="18sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/SubFieldId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Sub Category"
+            android:completionThreshold="1"
+            android:hint="Sub Category"
+            android:background="@drawable/border_black_disable"
+            android:textColor="#000000"
+            android:textSize="18sp"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/JobCapacityId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:completionHint="Job Capacity(Full-Time)"
+            android:completionThreshold="1"
+            android:hint="Job Capacity(Full-Time)"
+            android:inputType="text"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/lblEducations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Education"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/butSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:textColor="#000000"/>
+    </LinearLayout>
+</ScrollView>

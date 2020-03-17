@@ -1,0 +1,35 @@
+{"JobList":[
+  {
+    "JobId":"1",
+    "Job":"Job Desc1",
+    "JobNumber":"4566",
+    "CityId":"1",
+    "AreaId":"1",
+    "JobCapacityId":"1",
+    "CategoryId":"1",
+    "SubCategoryId":"1",
+    "JobStatusId":"1"
+  },
+  {
+    "JobId":"2",
+    "Job":"Job Desc2",
+    "JobNumber":"859958",
+    "CityId":"2",
+    "AreaId":"2",
+    "JobCapacityId":"2",
+    "CategoryId":"2",
+    "SubCategoryId":"2",
+    "JobStatusId":"2"
+  },
+  {
+    "JobId":"3",
+    "Job":"Job Desc3",
+    "JobNumber":"234234444",
+    "CityId":"3",
+    "AreaId":"3",
+    "JobCapacityId":"3",
+    "CategoryId":"3",
+    "SubCategoryId":"3",
+    "JobStatusId":"3"
+  }
+]}

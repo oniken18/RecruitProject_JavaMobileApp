@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ClientsActivity"
+    android:background="@color/colorAppBack">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:background="@color/colorAppMain">
+
+        <Button
+            android:id="@+id/butMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Main"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAppMain"
+            android:text="Clients       "
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <Switch
+            android:id="@+id/s_isFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Flag"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="10dp"/>
+        <Switch
+            android:id="@+id/s_isActive"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Active"
+            android:textSize="20sp"
+            android:paddingEnd="10dp"
+            android:paddingStart="20dp" />
+
+        <Button
+            android:id="@+id/butAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:layout_marginStart="60dp"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDCDCD">
+
+        <EditText
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:background="@drawable/border_black"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:hint="Search.."/>
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/lvClients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAppBack"/>
+</LinearLayout>

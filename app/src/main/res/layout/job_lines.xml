@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="3"
+    android:background="@drawable/list_background">
+
+    <TextView
+        android:id="@+id/txtJob"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        tools:text="Name"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txtCategory"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            tools:text="Name"
+            android:background="#e8e8e8"/>
+
+        <TextView
+            android:id="@+id/txtSubCategory"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="2"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:background="#d9e7fa"
+            tools:text="Name" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

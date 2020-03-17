@@ -1,0 +1,8 @@
+{"CityList":[
+  {"CityId":"1",
+    "City":"Tel Aviv",
+    "AreaId":"1"},
+  {"CityId":"2",
+    "City":"Jerusalem",
+    "AreaId":"2"}
+]}
