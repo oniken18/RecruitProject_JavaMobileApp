@@ -22,18 +22,15 @@ import java.util.Random;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private volatile Boolean isStopSuitcaseThread;
-
-    private Handler mainHandler = new Handler();
     RelativeLayout myLayout;
-
-    ObjectAnimator animX, animTranslationX;
-    Animation ScaleAnimation, FadeInAnimation;
+    Animation ScaleAnimation;
+    private volatile Boolean isStopSuitcaseThread;
+    private Handler mainHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        int SPLASH_TIMEOUT = 4000;
+        int SPLASH_TIMEOUT = 9000;
         TextView appName;
         View underLine;
 
@@ -43,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         appName = findViewById(R.id.AppName);
         underLine = findViewById(R.id.UnderLine);
-        myLayout = (RelativeLayout) findViewById(R.id.myLayout);
+        myLayout = findViewById(R.id.myLayout);
 
         ScaleAnimation = AnimationUtils.loadAnimation(this, R.anim.under_line);
         ScaleAnimation.setFillAfter(true);
@@ -67,61 +64,24 @@ public class WelcomeActivity extends AppCompatActivity {
         isStopSuitcaseThread = false;
         suitcaseThread ST = new suitcaseThread();
         ST.start();
-
-//        BallMoveX();
-//        BallMoveDown();
-//        BallMoveY();
-//        BallMoveUp();
     }
-
-//    private void BallMoveDown() {
-//        ObjectAnimator animation = ObjectAnimator.ofFloat(ball, "translationY", 860);
-//        animation.setStartDelay(4000);
-//        animation.setDuration(500);
-//        animation.setRepeatCount(0);
-//        animation.start();
-//    }
-//
-//    private void BallMoveY() {
-//        ObjectAnimator animation = ObjectAnimator.ofFloat(ball, "translationY", 500);
-//        animation.setStartDelay(4500);
-//        animation.setDuration(627);
-//        animation.setRepeatCount(5);
-//        animation.setRepeatMode(ValueAnimator.REVERSE);
-//        animation.start();
-//    }
-//
-//    private void BallMoveUp() {
-//        ObjectAnimator animation = ObjectAnimator.ofFloat(ball, "translationY", 0);
-//        animation.setStartDelay(8262);
-//        animation.setDuration(500);
-//        animation.setRepeatCount(0);
-//        animation.start();
-//    }
-//    private void BallMoveX() {
-//        ObjectAnimator animation = ObjectAnimator.ofFloat(ball, "translationX", -955);
-//        animation.setStartDelay(4000);
-//        animation.setDuration(4762);
-//        animation.setRepeatCount(0);
-//        animation.setRepeatMode(ValueAnimator.REVERSE);
-//        animation.start();
-//    }
 
     class suitcaseThread extends Thread {
 
-        suitcaseThread(){}
+        suitcaseThread() {
+        }
 
         @Override
         public void run() {
-            for (int i = 1; i < 50; i++){
-                if (isStopSuitcaseThread){
+            for (int i = 1; i < 70; i++) {
+                if (isStopSuitcaseThread) {
                     return;
                 }
-                createBag((i*80)+4000);
+                createBag((i * 80) + 4000);
             }
         }
 
-        private void createBag(final long startTime){
+        private void createBag(final long startTime) {
             final int leftPos;
             final long speed;
             final ImageView imageView;
@@ -137,19 +97,23 @@ public class WelcomeActivity extends AppCompatActivity {
 
             Random r = new Random();
 
-            speed =(long) r.nextInt((4000 - 800) + 1) + 800;
-            leftPos= r.nextInt((1100 - 140) + 1) + 140;
+            speed = (long) r.nextInt((6000 - 800) + 1) + 800;
+            leftPos = r.nextInt(1300);
+
+            layoutParams.height = r.nextInt((200 - 60) + 1) + 60;
+            layoutParams.width = layoutParams.height;
 
             layoutParams.leftMargin = leftPos;
-            layoutParams.topMargin = 480;
+            layoutParams.topMargin= (layoutParams.height * (-1));
+
 
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
 
-                    myLayout.addView(imageView,0,  layoutParams);
+                    myLayout.addView(imageView, 0, layoutParams);
 
-                    ObjectAnimator animation = ObjectAnimator.ofFloat(imageView, "translationY", 920);
+                    ObjectAnimator animation = ObjectAnimator.ofFloat(imageView, "translationY", 2300);
                     animation.setStartDelay(startTime);
                     animation.setDuration(speed);
                     animation.setRepeatCount(0);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
@@ -59,15 +61,24 @@ public class ClientDetailsActivity extends AppCompatActivity {
     EditText Email;
     EditText Phone;
     EditText Address;
-
     EditText txtJobNumber;
+
     TextView txtCategory;
     TextView txtSubCategory;
 
     Switch sActive;
 
-    Button butSubmit;
+    Button butSubmit, butEducations;
     int nmClient = 0;
+
+
+    public void setFocus(View view) {
+        view.requestFocus();
+    }
+
+    public void dropDown(AutoCompleteTextView view) {
+        view.showDropDown();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +99,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
         butSubmit = findViewById(R.id.butSubmit);
         lblTitle = findViewById(R.id.lblTitle);
         sActive =  findViewById(R.id.isActive);
+        butEducations =  findViewById(R.id.butEducations);
 
         Cities = RW.ReadJsonFile(getApplicationContext(), "CityList");
         Jobs = RW.ReadJsonFile(getApplicationContext(), "JobList");
@@ -120,6 +132,27 @@ public class ClientDetailsActivity extends AppCompatActivity {
         txtJob.setOnItemSelectedListener(SJ);
         txtJob.setOnItemClickListener(SJ);
         txtJob.setOnFocusChangeListener(SJ);
+
+        txtJobCapacity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtJobCapacity.showDropDown();
+            }
+        });
+
+        txtCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtCity.showDropDown();
+            }
+        });
+
+        txtJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtJob.showDropDown();
+            }
+        });
 
         SelectedJobNumber SJN = new SelectedJobNumber();
         txtJobNumber.setOnFocusChangeListener(SJN);
@@ -191,7 +224,6 @@ public class ClientDetailsActivity extends AppCompatActivity {
                 NewClient.setIsActive(isChecked);
             }
         });
-
 
         txtJobNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -273,7 +305,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                NewClient.setJobTypeId(0);
+                NewClient.setJobCapacityId(0);
             }
         });
 
@@ -330,14 +362,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (NewClient.getJobTypeId() == 0) {
+                if (NewClient.getJobCapacityId() == 0) {
                     strToast = "Fill Job Request From List";
                     Toast.makeText(getApplicationContext(), strToast, Toast.LENGTH_SHORT).show();
                     txtJobCapacity.requestFocus();
                     return;
                 }
 
-
+                NewClient.setClientId(Collections.max(Clients).getClientId() + 1);
                 NewClient.setFirstName(FirstName.getText().toString());
                 NewClient.setLastName(LastName.getText().toString());
                 NewClient.setEmail(Email.getText().toString());
@@ -371,6 +403,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+
+        butEducations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), EducationPopupActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     //SELECT CITY
@@ -381,14 +421,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedCity = (City) txtCity.getAdapter().getItem(position);
             NewClient.setCityId(SelectedCity.getCityId());
-            Address.requestFocus();
+            setFocus(Address);
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedCity = (City) txtCity.getAdapter().getItem(position);
             NewClient.setCityId(SelectedCity.getCityId());
-            Address.requestFocus();
+            setFocus(Address);
         }
 
         @Override
@@ -398,7 +438,9 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewClient.setCityId(0);
+            if (txtCity.hasFocus()) {
+                dropDown(txtCity);
+            }
         }
     }
 
@@ -410,12 +452,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedJob = (Job) txtJob.getAdapter().getItem(position);
             setClientJob();
+            setFocus(txtJobCapacity);
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedJob = (Job) txtJob.getAdapter().getItem(position);
             setClientJob();
+            setFocus(txtJobCapacity);
         }
 
         @Override
@@ -425,16 +469,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //deleteClientJob();
+            if (txtJob.hasFocus()) {
+                dropDown(txtJob);
+            }
         }
 
         private void setClientJob() {
             isChange =true;
             txtJobNumber.setText(Integer.toString(SelectedJob.getJobNumber()));
-
-            System.out.println(SelectedJob.getJobId());
-            System.out.println(SelectedJob.getCategoryId());
-            System.out.println(SelectedJob.getSubCategoryId());
 
             NewClient.setJobRequestId(SelectedJob.getJobId());
             NewClient.setCategoryId(SelectedJob.getCategoryId());
@@ -452,7 +494,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
                     break;
                 }
             }
-            txtJobCapacity.requestFocus();
+            setFocus(txtJobCapacity);
         }
     }
 
@@ -463,19 +505,15 @@ public class ClientDetailsActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedCapacity = (Capacity) txtJobCapacity.getAdapter().getItem(position);
-            NewClient.setJobTypeId(SelectedCapacity.getJobCapacityId());
-            butSubmit.setFocusable(true);
-            butSubmit.setFocusableInTouchMode(true);
-            butSubmit.onEditorAction(IME_ACTION_DONE);
+            NewClient.setJobCapacityId(SelectedCapacity.getJobCapacityId());
+            setFocus(txtJobCapacity);
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedCapacity = (Capacity) txtJobCapacity.getAdapter().getItem(position);
-            NewClient.setJobTypeId(SelectedCapacity.getJobCapacityId());
-            butSubmit.setFocusable(true);
-            butSubmit.setFocusableInTouchMode(true);
-            butSubmit.onEditorAction(IME_ACTION_DONE);
+            NewClient.setJobCapacityId(SelectedCapacity.getJobCapacityId());
+            setFocus(txtJobCapacity);
         }
 
         @Override
@@ -485,7 +523,9 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewClient.setJobTypeId(0);
+            if (txtJobCapacity.hasFocus()) {
+                dropDown(txtJobCapacity);
+            }
         }
     }
 

@@ -13,5 +13,5 @@
         android:layout_weight="1"
         android:textSize="25sp"
         tools:text="Job"
-        android:textColor="#000000"/>
+        android:textColor="@color/Black" />
 </LinearLayout>

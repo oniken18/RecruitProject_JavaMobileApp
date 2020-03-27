@@ -10,8 +10,7 @@
         android:id="@+id/txtSubCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textSize="25sp"
         tools:text="Category"
-        android:textColor="#000000"/>
+        android:textColor="@color/Black" />
 </LinearLayout>

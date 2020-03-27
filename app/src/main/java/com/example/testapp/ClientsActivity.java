@@ -55,7 +55,7 @@ public class ClientsActivity extends AppCompatActivity {
 
 
         ReadAndWriteToFile RW = new ReadAndWriteToFile();
-        Clients= RW.ReadJsonFile(getApplicationContext(),"ClientList");
+        Clients = RW.ReadJsonFile(getApplicationContext(), "ClientList");
 
         adapter = new ClientLines(this,Clients);
         lvClients.setAdapter(adapter);

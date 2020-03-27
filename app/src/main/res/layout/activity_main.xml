@@ -6,6 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BeigeLight"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
     tools:openDrawer="start">
@@ -19,20 +20,22 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/TopToolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:textColor="#FFFFFF">
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:background="@color/AppMain"
+            android:gravity="center">
 
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Main Menu"
-            android:textSize="35sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:text="Main menu"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title"
+                android:textSize="25sp" />
 
         </androidx.appcompat.widget.Toolbar>
+
 
         <View
             android:id="@+id/view"
@@ -63,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:onClick="DelDB"
             android:text="Search"
             android:textSize="25sp" />
     </LinearLayout>
@@ -72,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/BeigeLight"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/activity_side_menu"
         app:menu="@menu/app_menu" />

@@ -2,7 +2,11 @@ package com.example.testapp.ClassObjects;
 
 import android.icu.util.IslamicCalendar;
 
-public class Client {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Client implements Comparable{
 
     private int ClientId;
     private String FirstName;
@@ -12,17 +16,17 @@ public class Client {
     private String Address;
     private int AreaId;
     private int JobRequestId;
-    private int JobTypeId;
+    private int JobCapacityId;
     private int CategoryId;
     private int SubCategoryId;
-    private int EducationId;
+
     private String Phone;
     private boolean IsActive;
     private boolean IsFlag;
 
     public Client(){}
 
-    public Client(int clientID, String firstName, String lastName, String email, int cityId, String address, int areaId, int jobRequestId, int jobTypeId, int categoryId, int subCategoryId, int educationId, String phone, Boolean isActive, Boolean isFlag){
+    public Client(int clientID, String firstName, String lastName, String email, int cityId, String address, int areaId, int jobRequestId, int jobCapacityId, int categoryId, int subCategoryId, int educationId, String phone, Boolean isActive, Boolean isFlag){
         ClientId = clientID;
         FirstName=firstName;
         LastName=lastName;
@@ -31,10 +35,9 @@ public class Client {
         Address=address;
         AreaId=areaId;
         JobRequestId=jobRequestId;
-        JobTypeId=jobTypeId;
+        JobCapacityId=jobCapacityId;
         CategoryId=categoryId;
         SubCategoryId=subCategoryId;
-        EducationId=educationId;
         Phone=phone;
         IsActive=isActive;
         IsFlag = isFlag;
@@ -123,12 +126,12 @@ public class Client {
         JobRequestId = jobRequestId;
     }
 
-    public int getJobTypeId() {
-        return JobTypeId;
+    public int getJobCapacityId() {
+        return JobCapacityId;
     }
 
-    public void setJobTypeId(int jobTypeId) {
-        this.JobTypeId = jobTypeId;
+    public void setJobCapacityId(int jobCapacityId) {
+        this.JobCapacityId = jobCapacityId;
     }
 
     public int getCategoryId() {
@@ -153,6 +156,30 @@ public class Client {
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    //implements Comparable
+    @Override
+    public int compareTo(Object st) {
+        return this.ClientId-((Client)st).getClientId();
+    }
+
+    public static void SortA_Z(ArrayList<Client> AL, Boolean isReverse) {
+        if (isReverse) {
+            Collections.sort(AL, new Comparator<Client>() {
+                @Override
+                public int compare(Client o1, Client o2) {
+                    return o1.getFirstName().toLowerCase().compareTo(o2.getFirstName().toLowerCase());
+                }
+            });
+        }else {
+            Collections.sort(AL, new Comparator<Client>() {
+                @Override
+                public int compare(Client o1, Client o2) {
+                    return o2.getFirstName().toLowerCase().compareTo(o1.getFirstName().toLowerCase());
+                }
+            });
+        }
     }
 
 

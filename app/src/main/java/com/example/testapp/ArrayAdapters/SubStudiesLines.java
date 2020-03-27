@@ -11,67 +11,68 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.testapp.ClassObjects.SubCategory;
+import com.example.testapp.ClassObjects.SubStudies;
+import com.example.testapp.ClassObjects.SubStudies;
 import com.example.testapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubCategoryLines extends ArrayAdapter<SubCategory> {
+public class SubStudiesLines extends ArrayAdapter<SubStudies> {
 
-    private int CategoryId;
+    private int StudiesId;
     private String FilterPattern;
-    private List<SubCategory> FullCategoriesList;
+    private List<SubStudies> FullSubStudiesList;
 
 
-    public void setCategoryId(int categoryId) {
-        CategoryId = categoryId;
+    public void setStudiesId(int studiesId) {
+        StudiesId = studiesId;
     }
 
-    public SubCategoryLines(Activity context, ArrayList<SubCategory> Categories) {
-        super(context, 0, Categories);
-        FullCategoriesList = new ArrayList<>(Categories);
+    public SubStudiesLines(Activity context, ArrayList<SubStudies> SubStudies) {
+        super(context, 0, SubStudies);
+        FullSubStudiesList = new ArrayList<>(SubStudies);
     }
 
     @NonNull
     @Override
     public Filter getFilter() {
-        return CategoriesFilter;
+        return SubStudiesFilter;
     }
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        View listCategories = convertView;
-        if (listCategories == null) {
-            listCategories = LayoutInflater.from(getContext()).inflate(R.layout.subcategories_list, parent, false);
+        View listSubStudies = convertView;
+        if (listSubStudies == null) {
+            listSubStudies = LayoutInflater.from(getContext()).inflate(R.layout.substudies_list, parent, false);
         }
 
-        TextView Name = listCategories.findViewById(R.id.txtSubCategory);
+        TextView Name = listSubStudies.findViewById(R.id.txtSubStudies);
 
-        SubCategory CurrSubCategory = getItem(position);
-        if (CurrSubCategory != null) {
-            Name.setText(CurrSubCategory.getSubCategory());
+        SubStudies CurrSubStudies = getItem(position);
+        if (CurrSubStudies != null) {
+            Name.setText(CurrSubStudies.getSubStudy());
         }
 
-        return listCategories;
+        return listSubStudies;
     }
 
-    private Filter CategoriesFilter = new Filter() {
+    private Filter SubStudiesFilter = new Filter() {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<SubCategory> suggestions = new ArrayList<>();
+            List<SubStudies> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                for (SubCategory item : FullCategoriesList) {
-                    if (item.getCategoryId() == CategoryId) {
+                for (SubStudies item : FullSubStudiesList) {
+                    if (item.getStudyId() == StudiesId) {
                         suggestions.add(item);
                     }
                 }
             } else {
                 FilterPattern = constraint.toString().toLowerCase().trim();
-                for (SubCategory item : FullCategoriesList) {
-                    if ((item.getSubCategory().toLowerCase().contains(FilterPattern)) && item.getCategoryId() == CategoryId) {
+                for (SubStudies item : FullSubStudiesList) {
+                    if ((item.getSubStudy().toLowerCase().contains(FilterPattern)) && item.getStudyId() == StudiesId) {
                         suggestions.add(item);
                     }
                 }
@@ -92,7 +93,8 @@ public class SubCategoryLines extends ArrayAdapter<SubCategory> {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((SubCategory) resultValue).getSubCategory();
+            return ((SubStudies) resultValue).getSubStudy();
         }
     };
 }
+

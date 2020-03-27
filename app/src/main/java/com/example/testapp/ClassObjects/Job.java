@@ -1,8 +1,10 @@
 package com.example.testapp.ClassObjects;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class Job {
+public class Job implements Comparable {
 
     private int JobId;
     private int JobNumber;
@@ -106,5 +108,29 @@ public class Job {
 
     public void setIsActive(Boolean isActive) {
         IsActive = isActive;
+    }
+
+    //implements Comparable
+    @Override
+    public int compareTo(Object st) {
+        return this.JobId-((Job)st).getJobId();
+    }
+
+    public static void SortA_Z(ArrayList<Job> AL, Boolean isReverse) {
+        if (isReverse) {
+            Collections.sort(AL, new Comparator<Job>() {
+                @Override
+                public int compare(Job o1, Job o2) {
+                    return o1.getJob().toLowerCase().compareTo(o2.getJob().toLowerCase());
+                }
+            });
+        }else {
+            Collections.sort(AL, new Comparator<Job>() {
+                @Override
+                public int compare(Job o1, Job o2) {
+                    return o2.getJob().toLowerCase().compareTo(o1.getJob().toLowerCase());
+                }
+            });
+        }
     }
 }

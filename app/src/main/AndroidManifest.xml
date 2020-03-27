@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".EducationPopupActivity"
+            android:theme="@style/AppTheme.PopupEducation">
+        </activity>
+        <activity android:name=".TableActivity" />
         <activity android:name=".SideMenuActivity" />
         <activity android:name=".JobDetailsActivity" />
         <activity android:name=".JobsActivity" />
@@ -24,6 +28,7 @@
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

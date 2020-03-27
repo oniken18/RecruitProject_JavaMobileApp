@@ -1,8 +1,10 @@
 package com.example.testapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,26 +30,26 @@ import com.example.testapp.ClassObjects.Job;
 import com.example.testapp.ClassObjects.SubCategory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.$Gson$Preconditions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 
 public class JobDetailsActivity extends AppCompatActivity {
 
-    AutoCompleteTextView txtCity;
-    EditText txtJob;
-    AutoCompleteTextView txtJobCapacity;
-    EditText txtJobNumber;
-    AutoCompleteTextView txtCategory;
-    AutoCompleteTextView txtSubCategory;
+    AutoCompleteTextView txtCity, txtJobCapacity, txtCategory, txtSubCategory;
+    EditText txtJob, txtJobNumber;
+
     Switch sActive;
     TextView lblTitle;
     Button butSubmit;
+    SubCategoryLines SubCategoryAdapter;
 
     ArrayList<City> Cities = new ArrayList<>();
     ArrayList<Job> Jobs = new ArrayList<>();
@@ -62,6 +64,16 @@ public class JobDetailsActivity extends AppCompatActivity {
 
     int nmJob = 0;
 
+    public void setFocus(View view) {
+        view.requestFocus();
+    }
+
+    public void dropDown(AutoCompleteTextView view) {
+        view.showDropDown();
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +85,9 @@ public class JobDetailsActivity extends AppCompatActivity {
         txtJobNumber = findViewById(R.id.JobNumber);
         txtCategory = findViewById(R.id.Category);
         txtSubCategory = findViewById(R.id.SubCategory);
-        sActive =  findViewById(R.id.isActive);
-        lblTitle =  findViewById(R.id.lblTitle);
-        butSubmit =  findViewById(R.id.butSubmit);
+        sActive = findViewById(R.id.isActive);
+        lblTitle = findViewById(R.id.lblTitle);
+        butSubmit = findViewById(R.id.butSubmit);
 
         Cities = RW.ReadJsonFile(getApplicationContext(), "CityList");
         Jobs = RW.ReadJsonFile(getApplicationContext(), "JobList");
@@ -92,15 +104,13 @@ public class JobDetailsActivity extends AppCompatActivity {
         CategoryLines CategoryAdapter = new CategoryLines(this, Categories);
         txtCategory.setAdapter(CategoryAdapter);
 
-        SubCategoryLines SubCategoryAdapter = new SubCategoryLines(this, SubCategories);
+        SubCategoryAdapter = new SubCategoryLines(this, SubCategories);
         txtSubCategory.setAdapter(SubCategoryAdapter);
-
 
         SelectedCity SC = new SelectedCity();
         txtCity.setOnItemSelectedListener(SC);
         txtCity.setOnItemClickListener(SC);
         txtCity.setOnFocusChangeListener(SC);
-
 
         SelectedCapacity SCap = new SelectedCapacity();
         txtJobCapacity.setOnItemSelectedListener(SCap);
@@ -119,14 +129,14 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         try {
             nmJob = (int) getIntent().getSerializableExtra("nmJob");
-        } catch (Exception e){
+        } catch (Exception e) {
             nmJob = 0;
         }
 
-        if (nmJob == 0){
+        if (nmJob == 0) {
             NewJob = new Job();
             txtJob.requestFocus();
-        }else{
+        } else {
             for (Job CL : Jobs) {
                 if (CL.getJobId() == nmJob) {
                     NewJob = CL;
@@ -138,7 +148,7 @@ public class JobDetailsActivity extends AppCompatActivity {
             txtJob.setText(NewJob.getJob());
             txtJobNumber.setText(Integer.toString(NewJob.getJobNumber()));
 
-            for (int i = 0; i < Cities.size() ; i++) {
+            for (int i = 0; i < Cities.size(); i++) {
                 if (NewJob.getCityId() == Cities.get(i).getCityId()) {
                     txtCity.setText(Cities.get(i).getCity());
                     break;
@@ -158,7 +168,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                 }
             }
 
-            for (int i = 0; i < Capacities.size() ; i++) {
+            for (int i = 0; i < Capacities.size(); i++) {
                 if (NewJob.getCityId() == Capacities.get(i).getJobCapacityId()) {
                     txtJobCapacity.setText(Capacities.get(i).getJobCapacity());
                     break;
@@ -173,11 +183,39 @@ public class JobDetailsActivity extends AppCompatActivity {
             }
         });
 
+        txtCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtCity.showDropDown();
+            }
+        });
+
+        txtCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtCategory.showDropDown();
+            }
+        });
+
+        txtSubCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtSubCategory.showDropDown();
+            }
+        });
+
+        txtJobCapacity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtJobCapacity.showDropDown();
+            }
+        });
+
         txtCategory.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 NewJob.setCategoryId(0);
-                txtSubCategory.setText("");
+//                txtSubCategory.setText("");
             }
 
             @Override
@@ -187,7 +225,6 @@ public class JobDetailsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -256,7 +293,11 @@ public class JobDetailsActivity extends AppCompatActivity {
                     txtCity.requestFocus();
                     return;
                 }
-
+                if (Jobs.size()>0) {
+                    NewJob.setJobId(Collections.max(Jobs).getJobId() + 1);
+                }else{
+                    NewJob.setJobId(1);
+                }
                 NewJob.setJob(txtJob.getText().toString());
                 NewJob.setJobNumber(Integer.parseInt(txtJobNumber.getText().toString()));
                 NewJob.setIsActive(sActive.isChecked());
@@ -275,11 +316,11 @@ public class JobDetailsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                RW.WriteToFile(getApplicationContext(),"JobList", jsonArray);
-                Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
+                RW.WriteToFile(getApplicationContext(), "JobList", jsonArray);
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
 
                 Intent myIntent = new Intent(getApplicationContext(), JobsActivity.class);
-                myIntent.putExtra("activity","JobDetailsActivity");
+                myIntent.putExtra("activity", "JobDetailsActivity");
                 startActivity(myIntent);
             }
         });
@@ -308,7 +349,9 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewJob.setCityId(0);
+            if (txtCity.hasFocus()) {
+                dropDown(txtCity);
+            }
         }
     }
 
@@ -320,13 +363,14 @@ public class JobDetailsActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedCapacity = (Capacity) txtJobCapacity.getAdapter().getItem(position);
             NewJob.setJobCapacityId(SelectedCapacity.getJobCapacityId());
-
+            setFocus(txtCity);
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedCapacity = (Capacity) txtJobCapacity.getAdapter().getItem(position);
             NewJob.setJobCapacityId(SelectedCapacity.getJobCapacityId());
+            setFocus(txtCity);
         }
 
         @Override
@@ -336,7 +380,10 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewJob.setJobTypeId(0);
+
+            if (txtJobCapacity.hasFocus()) {
+                dropDown(txtJobCapacity);
+            }
         }
     }
 
@@ -344,16 +391,30 @@ public class JobDetailsActivity extends AppCompatActivity {
     class SelectedCategory implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, AdapterView.OnFocusChangeListener {
         private Category SelectedCategory;
 
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedCategory = (Category) txtCategory.getAdapter().getItem(position);
             NewJob.setCategoryId(SelectedCategory.getCategoryId());
+            SubCategoryAdapter.setCategoryId(NewJob.getCategoryId());
+            txtSubCategory.setAdapter(SubCategoryAdapter);
+//            txtCategory.dismissDropDown();
+//           txtSubCategory.setText("",true);
+//            resetTxt();
+            txtSubCategory.refreshAutoCompleteResults();
+            setFocus(txtSubCategory);
         }
-
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedCategory = (Category) txtCategory.getAdapter().getItem(position);
             NewJob.setCategoryId(SelectedCategory.getCategoryId());
+            SubCategoryAdapter.setCategoryId(NewJob.getCategoryId());
+            txtSubCategory.setAdapter(SubCategoryAdapter);
+            txtSubCategory.refreshAutoCompleteResults();
+//            txtCategory.dismissDropDown();
+//            resetTxt();
+            setFocus(txtSubCategory);
         }
 
         @Override
@@ -363,7 +424,9 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewJob.setJobTypeId(0);
+            if (txtCategory.hasFocus()) {
+                dropDown(txtCategory);
+            }
         }
     }
 
@@ -375,12 +438,14 @@ public class JobDetailsActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             SelectedSubCategory = (SubCategory) txtSubCategory.getAdapter().getItem(position);
             NewJob.setSubCategoryId(SelectedSubCategory.getSubCategoryId());
+            setFocus(txtJobCapacity);
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SelectedSubCategory = (SubCategory) txtSubCategory.getAdapter().getItem(position);
             NewJob.setSubCategoryId(SelectedSubCategory.getSubCategoryId());
+            setFocus(txtJobCapacity);
         }
 
         @Override
@@ -390,7 +455,11 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            //NewJob.setJobTypeId(0);
+
+            if (txtSubCategory.hasFocus()) {
+//                dropDown(txtSubCategory);
+            }
         }
+
     }
 }

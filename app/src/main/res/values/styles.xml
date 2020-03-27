@@ -1,22 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorAppBack</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
-        <item name="colorAccent">@color/colorAppMain</item>
-        <item name="titleTextColor">@color/colorBlack</item>
+        <item name="colorPrimary">@color/BeigeLight</item>
+        <item name="colorPrimaryDark">@color/Black</item>
+        <item name="colorAccent">@color/AppMain</item>
+        <item name="android:itemBackground">@color/BeigeLight</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="titleTextColor">@color/colorBlack</item>
+        <item name="titleTextColor">@color/BeigeLight</item>
+        <item name="android:itemBackground">@color/BeigeLight</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupEducation">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 
 
 </resources>

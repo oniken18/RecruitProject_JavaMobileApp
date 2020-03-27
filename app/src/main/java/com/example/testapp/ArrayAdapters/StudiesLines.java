@@ -9,57 +9,54 @@ import android.widget.Filter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.example.testapp.ClassObjects.Capacity;
+import com.example.testapp.ClassObjects.Studies;
 import com.example.testapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CapacityLines extends ArrayAdapter<Capacity> {
-
+public class StudiesLines  extends ArrayAdapter<Studies> {
     private String FilterPattern;
-    private List<Capacity> FullCapacitiesList;
+    private List<Studies> FullStudiesList;
 
-    public CapacityLines(Activity context, ArrayList<Capacity> Capacities) {
-        super(context, 0, Capacities);
-        FullCapacitiesList = new ArrayList<>(Capacities);
+    public StudiesLines(Activity context, ArrayList<Studies> studies) {
+        super(context, 0, studies);
+        FullStudiesList = new ArrayList<>(studies);
     }
-
 
     @NonNull
     @Override
-    public Filter getFilter() { return CapacitiesFilter; }
+    public Filter getFilter() { return StudiesFilter; }
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        View listCapacities = convertView;
-        if (listCapacities== null){
-            listCapacities = LayoutInflater.from(getContext()).inflate(R.layout.capacities_list,parent,false);
+        View listStudies = convertView;
+        if (listStudies== null){
+            listStudies = LayoutInflater.from(getContext()).inflate(R.layout.studies_list,parent,false);
         }
 
-        TextView Name =  listCapacities.findViewById(R.id.Capacity);
+        TextView Name =  listStudies.findViewById(R.id.Study);
 
-        Capacity CurrCapacity = getItem(position);
-        if (CurrCapacity !=null){
-            Name.setText(CurrCapacity.getJobCapacity());
+        Studies CurrStudy = getItem(position);
+        if (CurrStudy !=null){
+            Name.setText(CurrStudy.getStudy());
         }
 
-        return listCapacities;
+        return listStudies;
     }
 
-    private Filter CapacitiesFilter = new Filter() {
+    private Filter StudiesFilter = new Filter() {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<Capacity> suggestions = new ArrayList<>();
+            List<Studies> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(FullCapacitiesList);
+                suggestions.addAll(FullStudiesList);
             } else {
                 FilterPattern = constraint.toString().toLowerCase().trim();
-                for (Capacity item : FullCapacitiesList) {
-                    if (item.getJobCapacity().toLowerCase().contains(FilterPattern)) {
+                for (Studies item : FullStudiesList) {
+                    if (item.getStudy().toLowerCase().contains(FilterPattern)) {
                         suggestions.add(item);
                     }
                 }
@@ -80,7 +77,7 @@ public class CapacityLines extends ArrayAdapter<Capacity> {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((Capacity)resultValue).getJobCapacity();
+            return ((Studies)resultValue).getStudy();
         }
     };
 }

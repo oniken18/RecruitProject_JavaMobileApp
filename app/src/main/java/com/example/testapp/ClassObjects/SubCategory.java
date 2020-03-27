@@ -1,6 +1,10 @@
 package com.example.testapp.ClassObjects;
 
-public class SubCategory {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class SubCategory implements Comparable{
 
     private int SubCategoryId;
     private String SubCategory;
@@ -34,5 +38,29 @@ public class SubCategory {
 
     public void setCategoryId(int categoryId) {
         CategoryId = categoryId;
+    }
+
+    //implements Comparable
+    @Override
+    public int compareTo(Object st) {
+        return this.SubCategoryId-((SubCategory)st).getSubCategoryId();
+    }
+
+    public static void SortA_Z(ArrayList<SubCategory> AL, Boolean isReverse) {
+        if (isReverse) {
+            Collections.sort(AL, new Comparator<SubCategory>() {
+                @Override
+                public int compare(SubCategory o1, SubCategory o2) {
+                    return o1.getSubCategory().toLowerCase().compareTo(o2.getSubCategory().toLowerCase());
+                }
+            });
+        }else {
+            Collections.sort(AL, new Comparator<SubCategory>() {
+                @Override
+                public int compare(SubCategory o1, SubCategory o2) {
+                    return o2.getSubCategory().toLowerCase().compareTo(o1.getSubCategory().toLowerCase());
+                }
+            });
+        }
     }
 }

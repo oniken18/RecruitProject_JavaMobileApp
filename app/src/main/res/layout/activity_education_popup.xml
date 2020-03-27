@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EducationPopupActivity"
+    android:background="@drawable/popup_bg"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <AutoCompleteTextView
+        android:id="@+id/txtStudiesType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:completionHint="Studies type"
+        android:completionThreshold="1"
+        android:hint="Studies type"
+        android:inputType="text"
+        android:nextFocusForward="@id/txtStudies"
+        android:textColor="@color/Black" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtStudies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:completionHint="Studies"
+        android:completionThreshold="1"
+        android:hint="Studies"
+        android:inputType="text"
+        android:nextFocusForward="@id/txtSubStudies"
+        android:textColor="@color/Black" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtSubStudies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:completionHint="Sub Studies"
+        android:completionThreshold="1"
+        android:hint="Sub Studies"
+        android:inputType="text"
+        android:nextFocusForward="@id/SubCategory"
+        android:textColor="@color/Black" />
+
+    <Button
+        android:layout_margin="3dp"
+        android:id="@+id/butAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="add" />
+
+
+</LinearLayout>

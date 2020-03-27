@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ClientDetailsActivity">
-
+    tools:context=".ClientDetailsActivity"
+    android:background="@color/BeigeLight">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:text="New"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 android:textSize="20sp"
                 android:layout_gravity="center"
                 android:paddingEnd="20dp"
-                android:paddingStart="10dp"/>
+                android:paddingStart="10dp" />
         </LinearLayout>
 
         <EditText
@@ -65,7 +65,7 @@
             android:inputType="textPersonName"
             android:nextFocusForward="@id/LastName"
             android:textSize="20sp"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/LastName"
@@ -77,7 +77,7 @@
             android:hint="Last Name"
             android:inputType="textPersonName"
             android:nextFocusForward="@id/Email"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/Email"
@@ -89,7 +89,7 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:nextFocusForward="@id/Phone"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/Phone"
@@ -101,7 +101,7 @@
             android:hint="Phone Number"
             android:inputType="phone"
             android:nextFocusForward="@id/CityId"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
 
         <TextView
@@ -125,7 +125,7 @@
             android:hint="City"
             android:inputType="text"
             android:nextFocusForward="@id/Address"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/Address"
@@ -137,7 +137,7 @@
             android:hint="Address"
             android:inputType="text"
             android:nextFocusForward="@id/JobRequest"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lblJobRequest"
@@ -167,7 +167,7 @@
                 android:hint="Job request"
                 android:inputType="text"
                 android:nextFocusForward="@id/JobCapacityId"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/JobRequestId"
@@ -179,7 +179,8 @@
                 android:ems="10"
                 android:hint="Job num"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:inputType="number" />
         </LinearLayout>
 
         <TextView
@@ -192,7 +193,7 @@
             android:hint="Category"
             android:background="@drawable/border_black_disable"
             android:textSize="18sp"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/SubFieldId"
@@ -204,7 +205,7 @@
             android:hint="Sub Category"
             android:background="@drawable/border_black_disable"
             android:textColor="#000000"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <AutoCompleteTextView
             android:id="@+id/JobCapacityId"
@@ -215,17 +216,26 @@
             android:completionThreshold="1"
             android:hint="Job Capacity(Full-Time)"
             android:inputType="text"
-            android:textColor="#000000"/>
-        <TextView
-            android:id="@+id/lblEducations"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/butEducations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="7dp"
-            android:text="Education"
+            android:layout_marginTop="3dp"
+            android:text="Add Education"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/EducationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/butSubmit"
@@ -233,6 +243,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Submit"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
     </LinearLayout>
 </ScrollView>

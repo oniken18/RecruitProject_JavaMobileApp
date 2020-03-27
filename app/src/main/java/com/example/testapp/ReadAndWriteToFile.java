@@ -8,7 +8,10 @@ import com.example.testapp.ClassObjects.Category;
 import com.example.testapp.ClassObjects.City;
 import com.example.testapp.ClassObjects.Client;
 import com.example.testapp.ClassObjects.Job;
+import com.example.testapp.ClassObjects.Studies;
+import com.example.testapp.ClassObjects.StudiesType;
 import com.example.testapp.ClassObjects.SubCategory;
+import com.example.testapp.ClassObjects.SubStudies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -85,6 +91,15 @@ public class ReadAndWriteToFile {
                 for (int i = 0; i < JC.length(); ++i) {
                     JSONObject JObject = JC.getJSONObject(i);
                     switch (FileName) {
+                        case "StudiesTypeList":
+                            AL.add(new StudiesType(JObject.getInt("StudyTypeID"), JObject.getString("StudyType")));
+                            break;
+                        case "StudiesList":
+                            AL.add(new Studies(JObject.getInt("StudyId"), JObject.getString("Study")));
+                            break;
+                        case "SubStudiesList":
+                            AL.add(new SubStudies(JObject.getInt("SubStudyId"), JObject.getString("SubStudy"), JObject.getInt("StudyId")));
+                            break;
                         case "CityList":
                             AL.add(new City(JObject.getInt("CityId"), JObject.getString("City"), JObject.getInt("AreaId")));
                             break;

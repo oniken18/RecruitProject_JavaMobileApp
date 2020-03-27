@@ -6,28 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="@color/colorWelcomePage"
+    android:background="@drawable/colored_bg"
     android:orientation="vertical"
     tools:context=".WelcomeActivity">
-
-
-    <View
-        android:id="@+id/Line2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/colorWelcomePage"
-        tools:ignore="NotSibling" />
 
     <TextView
         android:id="@+id/AppName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="JOB RECRUIT"
-        android:textColor="#000000"
+        android:textColor="@color/White"
         android:textSize="50sp" />
 
     <View
@@ -37,31 +28,8 @@
         android:layout_below="@+id/AppName"
         android:layout_marginStart="45dp"
         android:layout_marginTop="-7dp"
-        android:background="@color/colorBlack"
+        android:background="@color/White"
         android:visibility="invisible" />
-
-    <View
-        android:id="@+id/ball"
-        android:layout_width="26dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="350dp"
-        android:layout_marginTop="119dp"
-        android:background="@drawable/circle_view1"
-        android:visibility="invisible" />
-
-    <View
-        android:id="@+id/box"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="400dp"
-        android:background="@color/colorWelcomePage" />
-
-    <View
-        android:id="@+id/Line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="399dp"
-        android:background="@color/colorBlack" />
 
 
 </RelativeLayout>
